@@ -1,0 +1,41 @@
+name: project-group4-workflow
+
+on:
+    workflow_dispatch:
+
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        env:
+            TF_VAR_subscription_id: ${{secrets.SUB_ID}}
+            TF_VAR_admin_password: ${{secrets.ADMIN_PASSWORD}}
+            TF_VAR_admin_username: ${{secrets.ADMIN_USERNAME}}
+        steps:
+            - name: Clone the repository
+              uses: actions/checkout@v5
+
+            - name: Azure Login
+              uses: Azure/login@v2.3.0
+              with:
+                  creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+            - name: "install tf/terraform"
+              uses: hashicorp/setup-terraform@v3
+
+            - name: "terraform init"
+              run: "terraform init"
+
+            - name: "terraform apply (with auto approve)"
+              run: "terraform apply --auto-approve"
+    second_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Proof it's another machine
+              run: ls -lah
+
+            - name: Discord notification
+              env:
+                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+              uses: Ilshidur/action-discord@master
+              with:
+                  args: "The workflow we made just ran!"

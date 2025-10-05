@@ -89,9 +89,3 @@ resource "azurerm_subnet_network_security_group_association" "name" {
 output "vm_ip" {
   value = azurerm_public_ip.pip.ip_address
 }
-
-output "ssh_command" {
-  value = "ssh ${azurerm_linux_virtual_machine.my_vm.admin_username}@${azurerm_public_ip.pip.ip_address}"
-
-  # ssh -i <private_key.pem> username@IP_ADDRESS
-}
