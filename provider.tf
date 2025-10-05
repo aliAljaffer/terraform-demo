@@ -5,6 +5,13 @@ terraform {
       version = "4.47.0"
     }
   }
+
+  backend "azurerm" {
+    storage_account_name = "storageaccalibe732e71d2"
+    container_name       = "terraformstatee8b82039fc"
+    resource_group_name  = "ali-rg-for-storage-acc"
+    key                  = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {

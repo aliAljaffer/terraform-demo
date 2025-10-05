@@ -1,3 +1,6 @@
 *.tfstate*
 .terraform*
 *.tfvars
+*.sh
+*.log
+*.key
