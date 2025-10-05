@@ -7,9 +7,9 @@ jobs:
     first_job:
         runs-on: ubuntu-latest
         env:
-            TF_VAR_subscription_id: ${{secrets.SUB_ID}}
-            TF_VAR_admin_password: ${{secrets.ADMIN_PASSWORD}}
-            TF_VAR_admin_username: ${{secrets.ADMIN_USERNAME}}
+            TF_VAR_subscription_id: ${{ secrets.SUB_ID }}
+            TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
+            TF_VAR_admin_username: ${{ secrets.ADMIN_USERNAME }}
         steps:
             - name: Clone the repository
               uses: actions/checkout@v5
@@ -28,6 +28,7 @@ jobs:
             - name: "terraform apply (with auto approve)"
               run: "terraform apply --auto-approve"
     second_job:
+        needs: first_job
         runs-on: ubuntu-latest
         steps:
             - name: Proof it's another machine
