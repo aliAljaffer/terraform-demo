@@ -1,7 +1,7 @@
 resource "azurerm_linux_virtual_machine" "my_vm" {
   location            = azurerm_resource_group.main_rg.location
   resource_group_name = azurerm_resource_group.main_rg.name
-  name                = "my-vm-oct-5"
+  name                = "maryam"
   size                = "Standard_D2s_v3"
 
   admin_username = var.admin_username
